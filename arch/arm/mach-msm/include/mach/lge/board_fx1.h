@@ -158,7 +158,7 @@ enum {
 #define MSM_8960_GSBI9_QUP_I2C_BUS_ID 9
 #endif
 
-#ifdef CONFIG_MACH_MSM8960_FX1SK     /* FX1SK has home key as DOME key (R1+C0) */
+#if 0     /* FX1SK has home key as DOME key (R1+C0) */
 #define LGE_KEY_MAP \
 	KEY(0, 0, KEY_VOLUMEDOWN),\
 	KEY(0, 1, KEY_VOLUMEUP),\

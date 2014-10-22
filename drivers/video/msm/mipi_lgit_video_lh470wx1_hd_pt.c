@@ -25,7 +25,7 @@
 static struct msm_panel_info pinfo;
 
 /*because SKT LTE BAND 5 TIS Sensitivity*/
-#if defined (CONFIG_MACH_MSM8960_FX1SK)
+#if 0
 #define DSI_BIT_CLK_445MHZ
 #else
 #define DSI_BIT_CLK_440MHZ

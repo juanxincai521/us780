@@ -34,7 +34,7 @@
 #endif
 #define MIN_LEVEL 		0x05
 #if defined(CONFIG_MACH_MSM8960_FX1)
-#if defined (CONFIG_MACH_MSM8960_FX1SK)
+#if 0
 #define DEFAULT_LEVEL	0x23
 #else
 #define DEFAULT_LEVEL	0x20

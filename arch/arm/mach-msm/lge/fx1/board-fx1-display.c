@@ -73,7 +73,7 @@ extern int refresh_qlut_display(void);
 #endif  /* CONFIG_FB_MSM_OVERLAY1_WRITEBACK */
 
 #if defined (CONFIG_FB_MSM_MIPI_LGIT_LH470WX1_VIDEO_HD_PT)
-#if defined (CONFIG_MACH_MSM8960_FX1SK)
+#if 0
 #define GPIO_LCD_DSV_EN         (97)
 #else
 #define GPIO_LCD_DSV_EN         (98)
@@ -1823,7 +1823,7 @@ static struct backlight_platform_data lm3530_data = {
 	.min_brightness = 0x05,
 	.max_brightness = 0x71,
 #if defined (CONFIG_FB_MSM_MIPI_LGIT_LH470WX1_VIDEO_HD_PT)
-#if defined (CONFIG_MACH_MSM8960_FX1SK)
+#if 0
 	.default_brightness = 0x23,
 	.factory_brightness = 0x23,
 #else

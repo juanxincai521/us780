@@ -49,7 +49,7 @@ struct msm_fb_data_type *local_mfd0 = NULL;
 static int is_ief_on = 1;
 #endif
 
-#if defined (CONFIG_MACH_MSM8960_FX1SK)
+#if 0
 #define GPIO_LCD_DSV_EN         (97)
 #else
 #define GPIO_LCD_DSV_EN         (98)
