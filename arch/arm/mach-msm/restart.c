@@ -294,7 +294,7 @@ void msm_restart(char mode, const char *cmd)
 			code = simple_strtoul(cmd + 4, NULL, 16) & 0xff;
 			__raw_writel(0x6f656d00 | code, restart_reason);
 		}
-#ifdef CONFIG_MACH_MSM8960_FX1SK
+#ifdef CONFIG_MACH_MSM8960_FX1
 		else if (!strncmp(cmd, "charge_reset", 12)) {
 			__raw_writel(0x77665599, restart_reason);
 		}

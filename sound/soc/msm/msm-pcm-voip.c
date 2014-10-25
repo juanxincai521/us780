@@ -266,7 +266,7 @@ static struct snd_kcontrol_new msm_voip_controls[] = {
 				msm_voip_dtx_mode_get, msm_voip_dtx_mode_put),
 };
 //[AUDIO_BSP]_START, 20120307, junday.lee, modified voip volume level(6->7) for Metro-PCS, D1LA, D1LV, L_DCM
-#elif defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV) || defined(CONFIG_MACH_MSM8960_D1LA) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L1A) || defined(CONFIG_MACH_MSM8960_L1m) || defined(CONFIG_MACH_MSM8960_L1v) || defined(CONFIG_MACH_MSM8960_FX1S) || defined(CONFIG_MACH_MSM8960_FX1SU) || defined(CONFIG_MACH_MSM8960_L1E_EVE_GB)
+#elif defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV) || defined(CONFIG_MACH_MSM8960_D1LA) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L1A) || defined(CONFIG_MACH_MSM8960_L1m) || defined(CONFIG_MACH_MSM8960_L1v) || defined(CONFIG_MACH_MSM8960_FX1S) || defined(CONFIG_MACH_MSM8960_L1E_EVE_GB)
 static struct snd_kcontrol_new msm_voip_controls[] = {
 	SOC_SINGLE_EXT("Voip Tx Mute", SND_SOC_NOPM, 0, 1, 0,
 				msm_voip_mute_get, msm_voip_mute_put),

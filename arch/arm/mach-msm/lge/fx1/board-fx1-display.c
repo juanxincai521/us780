@@ -1064,7 +1064,7 @@ static char mipi_dsi_splash_is_enabled(void)
 {
 	return mdp_pdata.cont_splash_enabled;
 }
-#if defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined (CONFIG_MACH_MSM8960_FX1SK)
 char lge_get_cont_splash_enabled(void)
 {
 	return mdp_pdata.cont_splash_enabled;
@@ -1856,7 +1856,7 @@ static struct i2c_registry fx1_i2c_backlight_device __initdata = {
 		ARRAY_SIZE(msm_i2c_backlight_info),
 };
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct gpiomux_setting mdp_vsync_suspend_cfg = {
 	.func = GPIOMUX_FUNC_GPIO,
 	.drv = GPIOMUX_DRV_2MA,
@@ -1882,7 +1882,7 @@ static struct msm_gpiomux_config msm8960_mdp_vsync_configs[] __initdata = {
 
 static int __init panel_gpiomux_init(void)
 {
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	int rc;
 #endif
 	gpio_tlmm_config(GPIO_CFG(12, 1, GPIO_CFG_INPUT, GPIO_CFG_NO_PULL, GPIO_CFG_2MA), GPIO_CFG_ENABLE);
@@ -1905,7 +1905,7 @@ static int __init panel_gpiomux_init(void)
 	pm8xxx_gpio_config(gpio24, &gpio24_param);
 }
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	rc = msm_gpiomux_init(NR_GPIO_IRQS);
 	if (rc == -EPERM) {
 		pr_info("%s : msm_gpiomux_init is already initialized\n",

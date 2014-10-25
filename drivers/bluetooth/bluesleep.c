@@ -225,7 +225,7 @@ void bluesleep_sleep_wakeup(void)
 		hsuart_power(1);
 	}
 //WORKAROUND	
-#if defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_FX1SK) || defined(CONFIG_MACH_MSM8960_FX1SU)
 	else
 	{
 		BT_DBG("Workaround for uart runtime suspend : Need to UART On");
@@ -255,7 +255,7 @@ static void bluesleep_sleep_work(struct work_struct *work)
 			return;
 		}
 
-#if !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SK)
+#if !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_FX1SU)
 		if (msm_hs_tx_empty(bsi->uport)) {
 #endif			
 			BT_DBG("going to sleep...");
@@ -269,7 +269,7 @@ static void bluesleep_sleep_work(struct work_struct *work)
 			wake_lock_timeout(&bsi->wake_lock, HZ / 2);
 #endif/*FEATURE_USE_BTLA*/
 //END: 0019639 chanha.park@lge.com 2012-06-16
-#if !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SK)
+#if !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_FX1SU)
 		}
 #endif		
 //BEGIN: 0019639 chanha.park@lge.com 2012-06-16

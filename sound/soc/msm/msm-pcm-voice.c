@@ -543,7 +543,7 @@ static int msm_voice_fens_get(struct snd_kcontrol *kcontrol,
 	return 0;
 }
 
-#if defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LA) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L1A) || defined(CONFIG_MACH_MSM8960_L1m) || defined(CONFIG_MACH_MSM8960_FX1S) || defined(CONFIG_MACH_MSM8960_FX1SU)
+#if defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LA) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L1A) || defined(CONFIG_MACH_MSM8960_L1m) || defined(CONFIG_MACH_MSM8960_FX1S)
 //[AUDIO_BSP]_START, 20120213, junday.lee, modified voice volume level(6->7) for Metro-PCS, D1LA, D1LV, L_DCM
 static struct snd_kcontrol_new msm_voice_controls[] = {
 	SOC_SINGLE_EXT("Voice Rx Device Mute", SND_SOC_NOPM, 0, 1, 0,
@@ -610,7 +610,7 @@ static struct snd_kcontrol_new msm_voice_controls[] = {
 	SOC_SINGLE_EXT("Voice2 Rx Volume", SND_SOC_NOPM, 0, 5, 0,
 		       msm_voice2_volume_get, msm_voice2_volume_put),
 };
-#elif defined(CONFIG_MACH_MSM8960_FX1SK) || defined(CONFIG_MACH_MSM8960_VU2)
+#elif defined(CONFIG_MACH_MSM8960_FX1SK) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_FX1SU)
 static struct snd_kcontrol_new msm_voice_controls[] = {
 	SOC_SINGLE_EXT("Voice Rx Device Mute", SND_SOC_NOPM, 0, 1, 0,
 				msm_voice_rx_device_mute_get,

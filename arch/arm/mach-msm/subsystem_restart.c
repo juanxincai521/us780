@@ -124,7 +124,7 @@ static const char * const _order_8x60_modems[] = {"external_modem", "modem"};
 DEFINE_SINGLE_RESTART_ORDER(orders_8x60_modems, _order_8x60_modems);
 #endif
 
-#if !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_VU2)
+#if !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SU)
 /*SGLTE restart ordering info*/
 static const char * const order_8960_sglte[] = {"external_modem",
 						"modem"};
@@ -714,7 +714,7 @@ static int __init ssr_init_soc_restart_orders(void)
 	}
 #endif
 
-#if !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_VU2)
+#if !defined(CONFIG_MACH_MSM8960_FX1SK) && !defined(CONFIG_MACH_MSM8960_VU2) && !defined(CONFIG_MACH_MSM8960_FX1SU)
 	if (socinfo_get_platform_subtype() == PLATFORM_SUBTYPE_SGLTE) {
 		restart_orders = restart_orders_8960_sglte;
 		n_restart_orders = ARRAY_SIZE(restart_orders_8960_sglte);

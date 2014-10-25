@@ -558,7 +558,7 @@ static int usb_online = 0;
 
 /* BEGIN: pk.jeon@lge.com 2012-04-23
  * For Use Battery Health in case BTM Disable in Domestic Operator and DCM, MPCS (D1LU, D1LSK, D1LKT, L_DCM, L0) */
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 int batt_health = POWER_SUPPLY_HEALTH_GOOD;
 #endif
 /* END : pk.jeon@lge.com 2012-04-23 */
@@ -2418,7 +2418,7 @@ static int get_prop_batt_health(struct pm8921_chg_chip *chip)
 {
 /* BEGIN: pk.jeon@lge.com 2012-04-23
  * For Use Battery Health in case BTM Disable in Domestic Operator and DCM, MPCS (D1LU, D1LSK, D1LKT, L_DCM, L0) */
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 		return batt_health;
 #else
 /* END : pk.jeon@lge.com 2012-04-23 */
@@ -4438,7 +4438,7 @@ static int chg_is_battery_too_hot_or_too_cold(void *data, int batt_temp, int bat
 
 		/* BEGIN: pk.jeon@lge.com 2012-04-23
 		 * For Use Battery Health in case BTM Disable in Domestic Operator and DCM, MPCS */
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 		pr_info("temp > %d: batt_health -> POWER_SUPPLY_HEALTH_OVERHEAT\n", chip->temp_level_1);
 		batt_health = POWER_SUPPLY_HEALTH_OVERHEAT;
 #endif
@@ -4503,7 +4503,7 @@ static int chg_is_battery_too_hot_or_too_cold(void *data, int batt_temp, int bat
 		}
 #endif /* CONFIG_LGE_WIRELESS_CHARGER */
 
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 		pr_info("[WIRELESS] batt_health -> POWER_SUPPLY_HEALTH_GOOD\n");
 		batt_health = POWER_SUPPLY_HEALTH_GOOD;
 #endif
@@ -4533,7 +4533,7 @@ static int chg_is_battery_too_hot_or_too_cold(void *data, int batt_temp, int bat
 
 		/* BEGIN: pk.jeon@lge.com 2012-04-23
 		 * For Use Battery Health in case BTM Disable in Domestic Operator and DCM, MPCS */
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 		pr_info("%d > temp >= %d: batt_health -> POWER_SUPPLY_HEALTH_GOOD\n", chip->temp_level_3, chip->temp_level_4);
 		batt_health = POWER_SUPPLY_HEALTH_GOOD;
 #endif
@@ -4589,7 +4589,7 @@ static int chg_is_battery_too_hot_or_too_cold(void *data, int batt_temp, int bat
 
 		/* BEGIN: pk.jeon@lge.com 2012-04-23
 		 * For Use Battery Health in case BTM Disable in Domestic Operator and DCM, MPCS */
-#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1SK)
+#if defined(CONFIG_MACH_MSM8960_D1LU) || defined(CONFIG_MACH_MSM8960_D1LSK) || defined(CONFIG_MACH_MSM8960_D1LKT) || defined(CONFIG_MACH_MSM8960_VU2) || defined(CONFIG_MACH_MSM8960_L_DCM) || defined(CONFIG_MACH_MSM8960_L0) || defined(CONFIG_MACH_MSM8960_D1LV)|| defined(CONFIG_MACH_MSM8960_FX1)
 		pr_info("temp <= %d: batt_health -> POWER_SUPPLY_HEALTH_COLD\n", chip->temp_level_5);
 		batt_health = POWER_SUPPLY_HEALTH_COLD;
 #endif

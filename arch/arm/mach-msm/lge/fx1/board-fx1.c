@@ -1359,7 +1359,7 @@ static struct platform_device qcedev_device = {
 };
 #endif
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct mdm_platform_data sglte_platform_data = {
 	.mdm_version = "4.0",
 	.ramdump_delay_ms = 1000,
@@ -1520,7 +1520,7 @@ static void __init msm8960_init_buses(void)
 	msm_bus_apps_fabric.dev.platform_data =
 		&msm_bus_8960_apps_fabric_pdata;
 	msm_bus_sys_fabric.dev.platform_data = &msm_bus_8960_sys_fabric_pdata;
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (cpu_is_msm8960ab()) {
 		msm_bus_8960_sg_mm_fabric_pdata.rpm_enabled = 1;
 		msm_bus_mm_fabric.dev.platform_data =
@@ -1759,7 +1759,7 @@ static uint8_t spm_retention_cmd_sequence[] __initdata = {
 			0x0B, 0x00, 0x0f,
 };
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static uint8_t spm_retention_with_krait_v3_cmd_sequence[] __initdata = {
 	0x42, 0x1B, 0x00,
 	0x05, 0x03, 0x0D, 0x0B,
@@ -1782,7 +1782,7 @@ static uint8_t spm_power_collapse_with_rpm[] __initdata = {
 			0x24, 0x30, 0x0f,
 };
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 /* 8960AB has a different command to assert apc_pdn */
 static uint8_t spm_power_collapse_without_rpm_krait_v3[] __initdata = {
 	0x00, 0x30, 0x24, 0x30,
@@ -1937,7 +1937,7 @@ static struct msm_spm_platform_data msm_spm_l2_data[] __initdata = {
 #define PM_HAP_EN_GPIO		PM8921_GPIO_PM_TO_SYS(33)
 #define PM_HAP_LEN_GPIO		PM8921_GPIO_PM_TO_SYS(20)
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct msm_xo_voter *xo_handle_d1;
 
 static int isa1200_power(int on)
@@ -2403,7 +2403,7 @@ static const u8 mxt1386e_config_data_3d[] = {
 #define MXT_TS_LDO_EN_GPIO		50
 #define MXT_TS_RESET_GPIO		52
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static void mxt_init_hw_liquid(void)
 {
 	int rc;
@@ -2429,7 +2429,7 @@ err_ldo_gpio_req:
 }
 #endif
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct mxt_config_info mxt_config_array_2d[] = {
 	{
 		.config		= mxt1386_config_data,
@@ -2729,7 +2729,7 @@ static struct platform_device msm8960_device_ext_5v_vreg __devinitdata = {
 	},
 };
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct platform_device msm8960_device_ext_l2_vreg __devinitdata = {
 	.name	= GPIO_REGULATOR_DEV_NAME,
 	.id	= 91,
@@ -2765,7 +2765,7 @@ static struct platform_device msm8960_device_rpm_regulator __devinitdata = {
 	},
 };
 #ifdef CONFIG_SERIAL_MSM_HS
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static struct msm_serial_hs_platform_data msm_uart_dm9_pdata = {
 	.config_gpio		= 4,
 	.uart_tx_gpio		= 93,
@@ -3455,7 +3455,7 @@ struct i2c_registry {
 };
 #endif /* QCT Original */
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 /* AVTimer */
 static struct platform_device msm_dev_avtimer_device = {
 	.name = "dev_avtimer",
@@ -3598,7 +3598,7 @@ static struct i2c_registry msm8960_i2c_devices[] __initdata = {
 		sii_device_info,
 		ARRAY_SIZE(sii_device_info),
 	},
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	{
 		I2C_LIQUID | I2C_FFA,
 		MSM_8960_GSBI10_QUP_I2C_BUS_ID,
@@ -3631,7 +3631,7 @@ static void __init register_i2c_devices(void)
 	};
 #endif
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	/* Build the matching 'supported_machs' bitmask */
 	if (machine_is_msm8960_cdp())
 		mach_mask = I2C_SURF;
@@ -3685,7 +3685,7 @@ static void __init msm8960_tsens_init(void)
 	msm_tsens_early_init(&msm_tsens_pdata);
 }
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 static void __init msm8960ab_update_krait_spm(void)
  {
  	int i;
@@ -3784,7 +3784,7 @@ static void __init msm8960_cdp_init(void)
 		spi_register_board_info(spi_eth_info, ARRAY_SIZE(spi_eth_info));
 
 	msm8960_init_pmic();
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (machine_is_msm8960_liquid() || (machine_is_msm8960_mtp() &&
 		(socinfo_get_platform_subtype() == PLATFORM_SUBTYPE_SGLTE ||
 			cpu_is_msm8960ab())))
@@ -3792,7 +3792,7 @@ static void __init msm8960_cdp_init(void)
 #endif
 	msm8960_i2c_init();
 	msm8960_gfx_init();
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
  	if (cpu_is_msm8960ab())
 		msm8960ab_update_krait_spm();
 
@@ -3807,7 +3807,7 @@ static void __init msm8960_cdp_init(void)
 	msm_spm_init(msm_spm_data, ARRAY_SIZE(msm_spm_data));
 	msm_spm_l2_init(msm_spm_l2_data);
 	msm8960_init_buses();
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (cpu_is_msm8960ab()) {
 		platform_add_devices(msm8960ab_footswitch,
 				     msm8960ab_num_footswitch);
@@ -3817,7 +3817,7 @@ static void __init msm8960_cdp_init(void)
 		platform_add_devices(msm8960_footswitch,
 				     msm8960_num_footswitch);
 	}
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (machine_is_msm8960_liquid())
 		platform_device_register(&msm8960_device_ext_3p3v_vreg);
 	if (machine_is_msm8960_cdp())
@@ -3847,7 +3847,7 @@ if (lge_get_board_revno() == HW_REV_A)
 		platform_device_register(&msm_device_uart_dm8);
 	}
 
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (cpu_is_msm8960ab())
 		platform_device_register(&msm8960ab_device_acpuclk);
 	else
@@ -3877,7 +3877,7 @@ if (lge_get_board_revno() == HW_REV_A)
 #endif
 #endif /* QCT Original */
 	msm8960_init_mmc();
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (machine_is_msm8960_liquid())
 		mxt_init_hw_liquid();
 #endif
@@ -3919,7 +3919,7 @@ if (lge_get_board_revno() == HW_REV_A)
 #endif
 	BUG_ON(msm_pm_boot_init(&msm_pm_boot_pdata));
 	bt_power_init();
-#ifndef CONFIG_MACH_MSM8960_FX1SK   //LGE
+#if 0   //LGE
 	if (socinfo_get_platform_subtype() == PLATFORM_SUBTYPE_SGLTE) {
 		mdm_sglte_device.dev.platform_data = &sglte_platform_data;
 		platform_device_register(&mdm_sglte_device);
