@@ -215,9 +215,10 @@ static void notify_all(int event, unsigned long data);
 static void bam_mux_write_done(struct work_struct *work);
 static void handle_bam_mux_cmd(struct work_struct *work);
 static void rx_timer_work_func(struct work_struct *work);
+static void queue_rx_work_func(struct work_struct *work);
 
 static DECLARE_WORK(rx_timer_work, rx_timer_work_func);
-static struct delayed_work queue_rx_work;
+static DECLARE_WORK(queue_rx_work, queue_rx_work_func);
 
 static struct workqueue_struct *bam_mux_rx_workqueue;
 static struct workqueue_struct *bam_mux_tx_workqueue;
@@ -269,7 +270,10 @@ static int need_delayed_ul_vote;
 static int power_management_only_mode;
 static int in_ssr;
 static int ssr_skipped_disconnect;
+<<<<<<< HEAD
 static struct completion shutdown_completion;
+=======
+>>>>>>> msm: bam_dmux: reset bam hardware when A2 goes into pc
 
 struct outside_notify_func {
 	void (*notify)(void *, int, unsigned long);
@@ -384,7 +388,7 @@ static inline void verify_tx_queue_is_empty(const char *func)
 	spin_unlock_irqrestore(&bam_tx_pool_spinlock, flags);
 }
 
-static void queue_rx(void)
+static void __queue_rx(gfp_t alloc_flags)
 {
 	void *ptr;
 	struct rx_pkt_info *info;
@@ -399,23 +403,23 @@ static void queue_rx(void)
 		if (in_global_reset)
 			goto fail;
 
-		info = kmalloc(sizeof(struct rx_pkt_info),
-						GFP_NOWAIT | __GFP_NOWARN);
+		info = kmalloc(sizeof(struct rx_pkt_info), alloc_flags);
 		if (!info) {
 			DMUX_LOG_KERR(
-			"%s: unable to alloc rx_pkt_info, will retry later\n",
-								__func__);
+			"%s: unable to alloc rx_pkt_info w/ flags %x, will retry later\n",
+								__func__,
+								alloc_flags);
 			goto fail;
 		}
 
 		INIT_WORK(&info->work, handle_bam_mux_cmd);
 
-		info->skb = __dev_alloc_skb(BUFFER_SIZE,
-						GFP_NOWAIT | __GFP_NOWARN);
+		info->skb = __dev_alloc_skb(BUFFER_SIZE, alloc_flags);
 		if (info->skb == NULL) {
 			DMUX_LOG_KERR(
-				"%s: unable to alloc skb, will retry later\n",
-								__func__);
+				"%s: unable to alloc skb w/ flags %x, will retry later\n",
+								__func__,
+								alloc_flags);
 			goto fail_info;
 		}
 		ptr = skb_put(info->skb, BUFFER_SIZE);
@@ -457,15 +461,30 @@ fail_info:
 	kfree(info);
 
 fail:
-	if (rx_len_cached == 0 && !in_global_reset) {
+	if (!in_global_reset) {
 		DMUX_LOG_KERR("%s: rescheduling\n", __func__);
-		schedule_delayed_work(&queue_rx_work, msecs_to_jiffies(100));
+		schedule_work(&queue_rx_work);
 	}
+}
+
+static void queue_rx(void)
+{
+	/*
+	 * Hot path.  Delays waiting for the allocation to find memory if its
+	 * not immediately available, and delays from logging allocation
+	 * failures which cannot be tolerated at this time.
+	 */
+	__queue_rx(GFP_NOWAIT | __GFP_NOWARN);
 }
 
 static void queue_rx_work_func(struct work_struct *work)
 {
-	queue_rx();
+	/*
+	 * Cold path.  Delays can be tolerated.  Use of GFP_KERNEL should
+	 * guarentee the requested memory will be found, after some ammount of
+	 * delay.
+	 */
+	__queue_rx(GFP_KERNEL);
 }
 
 static void bam_mux_process_data(struct sk_buff *rx_skb)
@@ -1760,13 +1779,22 @@ static void reconnect_to_bam(void)
 	if (!power_management_only_mode) {
 		if (ssr_skipped_disconnect) {
 			/* delayed to here to prevent bus stall */
+<<<<<<< HEAD
 			bam_ops->sps_disconnect_ptr(bam_tx_pipe);
 			bam_ops->sps_disconnect_ptr(bam_rx_pipe);
+=======
+			sps_disconnect(bam_tx_pipe);
+			sps_disconnect(bam_rx_pipe);
+>>>>>>> msm: bam_dmux: reset bam hardware when A2 goes into pc
 			__memzero(rx_desc_mem_buf.base, rx_desc_mem_buf.size);
 			__memzero(tx_desc_mem_buf.base, tx_desc_mem_buf.size);
 		}
 		ssr_skipped_disconnect = 0;
+<<<<<<< HEAD
 		i = bam_ops->sps_device_reset_ptr(a2_device_handle);
+=======
+		i = sps_device_reset(a2_device_handle);
+>>>>>>> msm: bam_dmux: reset bam hardware when A2 goes into pc
 		if (i)
 			pr_err("%s: device reset failed rc = %d\n", __func__,
 									i);
@@ -1837,12 +1865,20 @@ static void disconnect_to_bam(void)
 	/* in_ssr documentation/assumptions found in restart_notifier_cb */
 	if (!power_management_only_mode) {
 		if (likely(!in_ssr)) {
+<<<<<<< HEAD
 			BAM_DMUX_LOG("%s: disconnect tx\n", __func__);
 			bam_ops->sps_disconnect_ptr(bam_tx_pipe);
 			BAM_DMUX_LOG("%s: disconnect rx\n", __func__);
 			bam_ops->sps_disconnect_ptr(bam_rx_pipe);
 			__memzero(rx_desc_mem_buf.base, rx_desc_mem_buf.size);
 			__memzero(tx_desc_mem_buf.base, tx_desc_mem_buf.size);
+=======
+			sps_disconnect(bam_tx_pipe);
+			sps_disconnect(bam_rx_pipe);
+			__memzero(rx_desc_mem_buf.base, rx_desc_mem_buf.size);
+			__memzero(tx_desc_mem_buf.base, tx_desc_mem_buf.size);
+			sps_device_reset(a2_device_handle);
+>>>>>>> msm: bam_dmux: reset bam hardware when A2 goes into pc
 		} else {
 			ssr_skipped_disconnect = 1;
 		}
@@ -1969,6 +2005,7 @@ static int restart_notifier_cb(struct notifier_block *this,
 	 * processing.  We do not wat to access the bam hardware during SSR
 	 * because a watchdog crash from a bus stall would likely occur.
 	 */
+<<<<<<< HEAD
 	if (code == SUBSYS_BEFORE_SHUTDOWN) {
 		BAM_DMUX_LOG("%s: begin\n", __func__);
 		in_global_reset = 1;
@@ -1978,6 +2015,10 @@ static int restart_notifier_cb(struct notifier_block *this,
 		BAM_DMUX_LOG("%s: ssr signaling complete\n", __func__);
 		flush_workqueue(bam_mux_rx_workqueue);
 	}
+=======
+	if (code == SUBSYS_BEFORE_SHUTDOWN)
+		in_ssr = 1;
+>>>>>>> msm: bam_dmux: reset bam hardware when A2 goes into pc
 	if (code != SUBSYS_AFTER_SHUTDOWN)
 		return NOTIFY_DONE;
 
@@ -2475,7 +2516,6 @@ static int bam_dmux_probe(struct platform_device *pdev)
 	init_completion(&shutdown_completion);
 	complete_all(&shutdown_completion);
 	INIT_DELAYED_WORK(&ul_timeout_work, ul_timeout);
-	INIT_DELAYED_WORK(&queue_rx_work, queue_rx_work_func);
 	wake_lock_init(&bam_wakelock, WAKE_LOCK_SUSPEND, "bam_dmux_wakelock");
 	init_srcu_struct(&bam_dmux_srcu);
 
